@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vienna — Eight Places Worth Your Time</title>
+<meta name="description" content="A personal guide to Vienna's sightseeing highlights: imperial palaces, hidden gardens, quirky museums and more.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #1d3327;
+    --green-deep: #12211a;
+    --gold: #a8823f;
+    --gold-light: #c9a96a;
+    --ivory: #f6f1e7;
+    --ivory-warm: #efe7d7;
+    --ink: #2b2820;
+    --muted: #6f6a5c;
+    --serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    --sans: 'Jost', 'Segoe UI', Helvetica, Arial, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--ivory);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.65;
+  }
+
+  /* ---------- Hero ---------- */
+
+  header.hero {
+    background: var(--green-deep);
+    color: var(--ivory);
+    text-align: center;
+    padding: 6rem 1.5rem 4.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header.hero::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .hero .kicker {
+    font-size: 0.8rem;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 1.2rem;
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(3.5rem, 11vw, 7.5rem);
+    letter-spacing: 0.12em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .hero h1 .amp { color: var(--gold-light); font-style: italic; }
+
+  .hero .subtitle {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(1.15rem, 3vw, 1.6rem);
+    color: #d9cfba;
+    margin-top: 1.4rem;
+  }
+
+  .hero .lede {
+    max-width: 620px;
+    margin: 1.8rem auto 0;
+    font-size: 1rem;
+    color: #b9b2a0;
+  }
+
+  /* ---------- Nav ---------- */
+
+  nav.index {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1.6rem 1rem;
+    background: var(--ivory-warm);
+    border-bottom: 1px solid #ddd2bd;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+  }
+
+  nav.index a {
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--green);
+    padding: 0.35rem 0.85rem;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    transition: border-color .2s, color .2s;
+  }
+
+  nav.index a:hover { border-color: var(--gold); color: var(--gold); }
+
+  nav.index a .num { color: var(--gold); margin-right: 0.35em; }
+
+  /* ---------- Sections ---------- */
+
+  main { max-width: 1180px; margin: 0 auto; padding: 1rem 1.5rem 4rem; }
+
+  section.spot {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    padding: 4.5rem 0;
+    border-bottom: 1px solid #ddd2bd;
+  }
+
+  section.spot:last-of-type { border-bottom: none; }
+
+  section.spot:nth-child(even) .gallery { order: 2; }
+
+  /* ---------- Gallery ---------- */
+
+  .gallery .frame {
+    background: #fff;
+    padding: 10px;
+    border: 1px solid #e0d5bd;
+    box-shadow: 0 14px 40px rgba(29, 51, 39, 0.14);
+  }
+
+  .gallery .main-img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    display: block;
+  }
+
+  .thumbs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .thumbs button {
+    border: 2px solid transparent;
+    padding: 0;
+    cursor: pointer;
+    background: none;
+    line-height: 0;
+    transition: border-color .2s, opacity .2s;
+    opacity: 0.65;
+  }
+
+  .thumbs button.active { border-color: var(--gold); opacity: 1; }
+  .thumbs button:hover { opacity: 1; }
+
+  .thumbs img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* ---------- Text ---------- */
+
+  .spot .number {
+    font-family: var(--serif);
+    font-size: 4.2rem;
+    line-height: 1;
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  .spot h2 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(1.9rem, 4vw, 2.7rem);
+    color: var(--green);
+    line-height: 1.15;
+    margin: 0.4rem 0 0.2rem;
+  }
+
+  .spot .aka {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--muted);
+  }
+
+  .spot .vibe {
+    display: inline-block;
+    margin: 1rem 0 1.1rem;
+    padding: 0.3rem 0.9rem;
+    border-left: 3px solid var(--gold);
+    background: var(--ivory-warm);
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--green);
+  }
+
+  .spot p { margin-bottom: 1rem; font-size: 1.02rem; }
+
+  .spot .best {
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+
+  .spot .best strong {
+    color: var(--green);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+  }
+
+  .spot .links { margin-top: 1.4rem; display: flex; flex-wrap: wrap; gap: 0.7rem; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--sans);
+    font-size: 0.82rem;
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.7rem 1.4rem;
+    border: 1px solid var(--green);
+    color: var(--green);
+    transition: background .2s, color .2s, border-color .2s;
+  }
+
+  .btn:hover { background: var(--green); color: var(--ivory); }
+
+  .btn.gold { border-color: var(--gold); color: var(--gold); }
+  .btn.gold:hover { background: var(--gold); color: #fff; }
+
+  /* ---------- Footer ---------- */
+
+  footer {
+    background: var(--green-deep);
+    color: #a99f88;
+    text-align: center;
+    padding: 3rem 1.5rem;
+    font-size: 0.85rem;
+  }
+
+  footer .mark {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    color: var(--gold-light);
+    letter-spacing: 0.2em;
+    margin-bottom: 0.6rem;
+  }
+
+  footer a { color: var(--gold-light); }
+
+  /* ---------- Responsive ---------- */
+
+  @media (max-width: 860px) {
+    section.spot { grid-template-columns: 1fr; gap: 1.8rem; padding: 3rem 0; }
+    section.spot:nth-child(even) .gallery { order: 0; }
+    nav.index { position: static; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <p class="kicker">A Personal City Guide</p>
+  <h1>Wien<span class="amp">.</span></h1>
+  <p class="subtitle">Eight places worth your time</p>
+  <p class="lede">Vienna blends imperial grandeur, quirky modern architecture, and tranquil natural spaces. Here is what each spot offers to help you decide.</p>
+</header>
+
+<nav class="index">
+  <a href="#belvedere"><span class="num">01</span>Belvedere</a>
+  <a href="#botanical"><span class="num">02</span>Botanical Garden</a>
+  <a href="#butterfly"><span class="num">03</span>Butterfly House</a>
+  <a href="#justice"><span class="num">04</span>Palace of Justice</a>
+  <a href="#setagaya"><span class="num">05</span>Setagayapark</a>
+  <a href="#kunsthaus"><span class="num">06</span>Kunst Haus Wien</a>
+  <a href="#meeres"><span class="num">07</span>Haus des Meeres</a>
+  <a href="#musik"><span class="num">08</span>Haus der Musik</a>
+</nav>
+
+<main>
+
+  <!-- 01 Belvedere -->
+  <section class="spot" id="belvedere">
+    <div class="gallery">
+      <div class="frame"><img class="main-img" src="images/belvedere-1.jpg" alt="Upper Belvedere palace and reflecting pool"></div>
+      <div class="thumbs">
+        <button class="active"><img src="images/belvedere-1.jpg" alt=""></button>
+        <button><img src="images/belvedere-2.jpg" alt=""></button>
+        <button><img src="images/belvedere-3.jpg" alt=""></button>
+      </div>
+    </div>
+    <div class="text">
+      <div class="number">01</div>
+      <h2>Belvedere Palace</h2>
+      <p class="aka">Schloss Belvedere</p>
+      <p class="vibe">Imperial Baroque grandeur &amp; iconic Austrian art</p>
+      <p>A UNESCO World Heritage complex comprising the Upper and Lower Belvedere set within stepped French formal gardens. The Upper Belvedere holds Austria's premier art collection, headlined by Gustav Klimt's <em>The Kiss</em> and major works by Egon Schiele.</p>
+      <p class="best"><strong>Best for</strong> — anyone wanting classic Viennese palatial history and world-famous fine art.</p>
+      <div class="links">
+        <a class="btn" href="https://www.belvedere.at/en" target="_blank" rel="noopener">Official site</a>
+        <a class="btn gold" href="https://www.google.com/maps/search/?api=1&amp;query=Belvedere+Palace+Vienna" target="_blank" rel="noopener">Google Maps &nearr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 Botanical Garden -->
+  <section class="spot" id="botanical">
+    <div class="gallery">
+      <div class="frame"><img class="main-img" src="images/botanical-1.jpg" alt="Grounds of the University of Vienna Botanical Garden"></div>
+      <div class="thumbs">
+        <button class="active"><img src="images/botanical-1.jpg" alt=""></button>
+        <button><img src="images/botanical-2.jpg" alt=""></button>
+        <button><img src="images/botanical-3.jpg" alt=""></button>
+      </div>
+    </div>
+    <div class="text">
+      <div class="number">02</div>
+      <h2>Botanical Garden</h2>
+      <p class="aka">Botanischer Garten der Universität Wien</p>
+      <p class="vibe">An unhurried, leafy scientific oasis right in the city</p>
+      <p>Founded in 1754 by Empress Maria Theresa, this 8-hectare living laboratory borders the Belvedere gardens and cultivates over 12,000 plant species from across the globe. It is quiet, educational, and free to enter.</p>
+      <p class="best"><strong>Best for</strong> — nature lovers and travelers seeking a quiet stroll away from tourist crowds.</p>
+      <div class="links">
+        <a class="btn" href="https://botanischergarten.univie.ac.at/en/" target="_blank" rel="noopener">Official site</a>
+        <a class="btn gold" href="https://www.google.com/maps/search/?api=1&amp;query=Botanical+Garden+of+the+University+of+Vienna" target="_blank" rel="noopener">Google Maps &nearr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 Butterfly House -->
+  <section class="spot" id="butterfly">
+    <div class="gallery">
+      <div class="frame"><img class="main-img" src="images/butterfly-1.jpg" alt="Art Nouveau glasshouse of the Imperial Butterfly House"></div>
+      <div class="thumbs">
+        <button class="active"><img src="images/butterfly-1.jpg" alt=""></button>
+        <button><img src="images/butterfly-2.jpg" alt=""></button>
+        <button><img src="images/butterfly-3.jpg" alt=""></button>
+      </div>
+    </div>
+    <div class="text">
+      <div class="number">03</div>
+      <h2>Imperial Butterfly House</h2>
+      <p class="aka">Schmetterlinghaus</p>
+      <p class="vibe">A humid, tropical slice of rainforest inside a historic palace park</p>
+      <p>Located in a grand Art Nouveau glasshouse within the Hofburg's Burggarten, the sanctuary keeps a year-round temperature of 26&nbsp;°C with 80% humidity. Around 400 colorful, free-flying tropical butterflies flutter among indoor waterfalls and exotic blossoms.</p>
+      <p class="best"><strong>Best for</strong> — a quick, sensory visit, especially rewarding on cold or rainy days.</p>
+      <div class="links">
+        <a class="btn" href="https://www.schmetterlinghaus.at/en-gb" target="_blank" rel="noopener">Official site</a>
+        <a class="btn gold" href="https://www.google.com/maps/search/?api=1&amp;query=Schmetterlinghaus+Vienna" target="_blank" rel="noopener">Google Maps &nearr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 Palace of Justice -->
+  <section class="spot" id="justice">
+    <div class="gallery">
+      <div class="frame"><img class="main-img" src="images/justice-1.jpg" alt="Monumental central atrium, grand staircase, and statue of Justitia"></div>
+      <div class="thumbs">
+        <button class="active"><img src="images/justice-1.jpg" alt="Central atrium and staircase"></button>
+        <button><img src="images/justice-2.jpg" alt="Rooftop terrace view over the Austrian Parliament"></button>
+        <button><img src="images/justice-3.jpg" alt="Three-story arcaded atrium hall"></button>
+      </div>
+    </div>
+    <div class="text">
+      <div class="number">04</div>
+      <h2>Palace of Justice</h2>
+      <p class="aka">Justizpalast</p>
+      <p class="vibe">Imposing Neo-Renaissance civic architecture &amp; a local skyline secret</p>
+      <p>The working seat of Austria's Supreme Court. Visitors pass through security to enter the cavernous central atrium, which features a monumental marble staircase and three-story arcades. The 5th floor houses the rooftop Justiz-Café, which serves weekday meals and drinks alongside open terrace views across Vienna's roofs.</p>
+      <p class="best"><strong>Best for</strong> — architecture fans and budget-friendly rooftop viewpoints.</p>
+      <div class="links">
+        <a class="btn" href="https://justizcafe.at/" target="_blank" rel="noopener">Justiz-Café</a>
+        <a class="btn gold" href="https://www.google.com/maps/search/?api=1&amp;query=Justizpalast+Vienna" target="_blank" rel="noopener">Google Maps &nearr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 Setagayapark -->
+  <section class="spot" id="setagaya">
+    <div class="gallery">
+      <div class="frame"><img class="main-img" src="images/setagaya-1.jpg" alt="Japanese garden and pond in Setagayapark"></div>
+      <div class="thumbs">
+        <button class="active"><img src="images/setagaya-1.jpg" alt=""></button>
+        <button><img src="images/setagaya-2.jpg" alt=""></button>
+        <button><img src="images/setagaya-3.jpg" alt=""></button>
+      </div>
+    </div>
+    <div class="text">
+      <div class="number">05</div>
+      <h2>Setagayapark</h2>
+      <p class="aka">Japanese Garden in Döbling</p>
+      <p class="vibe">Serene, meditative Japanese garden design in Vienna's 19th district</p>
+      <p>Built in 1992 by Japanese landscape architect Ken Nakajima to honor a twinning partnership with Setagaya, Tokyo. Packed into roughly 4,700&nbsp;m² are stone pagodas, arched wooden bridges, cascading waterfalls, a tea house, and a pond with koi fish. <em>Note: closed during winter, November through February.</em></p>
+      <p class="best"><strong>Best for</strong> — quiet contemplation, Japanese aesthetics, and photo walks (especially during cherry blossom season or autumn foliage).</p>
+      <div class="links">
+        <a class="btn" href="https://www.wien.gv.at/en/leisure/setagaya-park" target="_blank" rel="noopener">City of Vienna</a>
+        <a class="btn gold" href="https://www.google.com/maps/search/?api=1&amp;query=Setagayapark+Vienna" target="_blank" rel="noopener">Google Maps &nearr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 Kunst Haus Wien -->
+  <section class="spot" id="kunsthaus">
+    <div class="gallery">
+      <div class="frame"><img class="main-img" src="images/kunsthaus-1.jpg" alt="Patchwork facade of Kunst Haus Wien"></div>
+      <div class="thumbs">
+        <button class="active"><img src="images/kunsthaus-1.jpg" alt=""></button>
+        <button><img src="images/kunsthaus-2.jpg" alt=""></button>
+        <button><img src="images/kunsthaus-3.jpg" alt=""></button>
+      </div>
+    </div>
+    <div class="text">
+      <div class="number">06</div>
+      <h2>Kunst Haus Wien</h2>
+      <p class="aka">Museum Hundertwasser</p>
+      <p class="vibe">Whimsical, anti-conformist, and deeply ecological</p>
+      <p>Designed by Austrian eco-artist Friedensreich Hundertwasser, this building refuses straight lines and level floors. Expect uneven tiled corridors, patchwork ceramic facades, and live "tree tenants" growing straight out of windows. It houses Hundertwasser's paintings and architectural philosophy alongside rotating contemporary photography exhibits.</p>
+      <p class="best"><strong>Best for</strong> — creatives, fans of unique architecture, and sustainable art enthusiasts.</p>
+      <div class="links">
+        <a class="btn" href="https://www.kunsthauswien.com/en/" target="_blank" rel="noopener">Official site</a>
+        <a class="btn gold" href="https://www.google.com/maps/search/?api=1&amp;query=Kunst+Haus+Wien+Vienna" target="_blank" rel="noopener">Google Maps &nearr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 Haus des Meeres -->
+  <section class="spot" id="meeres">
+    <div class="gallery">
+      <div class="frame"><img class="main-img" src="images/meeres-1.jpg" alt="Massive WWII concrete flak tower and climbing wall in Esterházypark"></div>
+      <div class="thumbs">
+        <button class="active"><img src="images/meeres-1.jpg" alt="Flak tower exterior and climbing wall"></button>
+        <button><img src="images/meeres-2.jpg" alt="Walk-through underwater Atlantic tunnel"></button>
+        <button><img src="images/meeres-3.jpg" alt="Panoramic rooftop observation deck view over Vienna"></button>
+      </div>
+    </div>
+    <div class="text">
+      <div class="number">07</div>
+      <h2>Haus des Meeres</h2>
+      <p class="aka">Aqua Terra Zoo</p>
+      <p class="vibe">Vibrant marine &amp; exotic wildlife inside massive WWII defense architecture</p>
+      <p>A public zoo installed inside a massive concrete flak tower in Esterházypark. Spanning 11 floors, it features a two-story shark tank, an aquarium walk-through tunnel, a multi-story tropical house with free-roaming monkeys and birds, and a 360° open-air rooftop observation deck.</p>
+      <p class="best"><strong>Best for</strong> — animal lovers, families, and anyone intrigued by adaptive reuse of wartime history.</p>
+      <div class="links">
+        <a class="btn" href="https://www.haus-des-meeres.at/" target="_blank" rel="noopener">Official site</a>
+        <a class="btn gold" href="https://www.google.com/maps/search/?api=1&amp;query=Haus+des+Meeres+Vienna" target="_blank" rel="noopener">Google Maps &nearr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 Haus der Musik -->
+  <section class="spot" id="musik">
+    <div class="gallery">
+      <div class="frame"><img class="main-img" src="images/musik-1.jpg" alt="Haus der Musik facade on Annagasse"></div>
+      <div class="thumbs">
+        <button class="active"><img src="images/musik-1.jpg" alt=""></button>
+        <button><img src="images/musik-2.jpg" alt=""></button>
+        <button><img src="images/musik-3.jpg" alt=""></button>
+      </div>
+    </div>
+    <div class="text">
+      <div class="number">08</div>
+      <h2>House of Music</h2>
+      <p class="aka">Haus der Musik</p>
+      <p class="vibe">Playful, high-tech auditory exploration in the historic capital of music</p>
+      <p>Housed in the palace where the Vienna Philharmonic was founded, this interactive museum turns sound physics and classical music into games. Highlights include the Virtual Conductor — where a projected Vienna Philharmonic plays to your baton tempo, or stops and heckles you if you lose time — and interactive sound installations.</p>
+      <p class="best"><strong>Best for</strong> — interactive learners, music enthusiasts, and fun rainy-afternoon visits.</p>
+      <div class="links">
+        <a class="btn" href="https://www.hdm.at/" target="_blank" rel="noopener">Official site</a>
+        <a class="btn gold" href="https://www.google.com/maps/search/?api=1&amp;query=Haus+der+Musik+Vienna" target="_blank" rel="noopener">Google Maps &nearr;</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="mark">WIEN</div>
+  <p>Eight places worth your time · All photographs via <a href="https://commons.wikimedia.org" target="_blank" rel="noopener">Wikimedia Commons</a></p>
+</footer>
+
+<script>
+  document.querySelectorAll('.spot').forEach(function (spot) {
+    var main = spot.querySelector('.main-img');
+    spot.querySelectorAll('.thumbs button').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var img = btn.querySelector('img');
+        main.src = img.src;
+        spot.querySelectorAll('.thumbs button').forEach(function (b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
