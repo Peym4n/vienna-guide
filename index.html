@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vienna — Eight Places Worth Your Time</title>
-<meta name="description" content="A personal guide to Vienna's sightseeing highlights: imperial palaces, hidden gardens, quirky museums and more.">
+<title>Vienna — Nine Places Worth Your Time</title>
+<meta name="description" content="A personal guide to nine Vienna sights, with photos, practical visiting tips and map links.">
+<link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
@@ -24,7 +25,7 @@
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; scroll-padding-top: 8.5rem; }
 
   body {
     background: var(--ivory);
@@ -125,11 +126,13 @@
   section.spot {
     display: grid;
     grid-template-columns: 1.15fr 1fr;
-    gap: 3rem;
-    align-items: center;
+    gap: 1rem 3rem;
+    align-items: start;
     padding: 4.5rem 0;
     border-bottom: 1px solid #ddd2bd;
   }
+
+  .spot-heading { grid-column: 1 / -1; }
 
   section.spot:last-of-type { border-bottom: none; }
 
@@ -147,9 +150,22 @@
   .gallery .main-img {
     width: 100%;
     aspect-ratio: 4 / 3;
-    object-fit: cover;
+    object-fit: contain;
+    background: var(--ivory-warm);
     display: block;
   }
+
+  .photo-caption {
+    padding: 0.75rem 0.25rem 0.15rem;
+    color: var(--muted);
+    font-size: 0.85rem;
+    line-height: 1.45;
+  }
+
+  .photo-caption .caption-title { display: block; color: var(--ink); }
+  .photo-credit { display: block; margin-top: 0.2rem; font-size: 0.75rem; }
+  .photo-credit a { color: var(--green); }
+  .photo-credit a:hover { color: var(--gold); }
 
   .thumbs {
     display: grid;
@@ -170,12 +186,73 @@
 
   .thumbs button.active { border-color: var(--gold); opacity: 1; }
   .thumbs button:hover { opacity: 1; }
+  .thumbs button:focus-visible, .btn:focus-visible, nav.index a:focus-visible, .photo-caption a:focus-visible, summary:focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: 3px;
+  }
 
   .thumbs img {
     width: 100%;
     aspect-ratio: 4 / 3;
     object-fit: cover;
     display: block;
+  }
+
+  .quick-picks {
+    margin: 2.5rem 0 1rem;
+    padding: 1.8rem 2rem;
+    background: var(--green);
+    color: var(--ivory);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem 2rem;
+  }
+
+  .quick-picks h2 {
+    grid-column: 1 / -1;
+    color: var(--gold-light);
+    font: 500 1.8rem/1.1 var(--serif);
+  }
+
+  .quick-picks p { margin: 0; font-size: 0.95rem; }
+  .quick-picks strong { color: var(--gold-light); font-weight: 500; }
+  .quick-picks .route-note { grid-column: 1 / -1; color: #d9cfba; font-style: italic; }
+
+  .visit-info {
+    list-style: none;
+    margin: 1rem 0 1.2rem;
+    padding: 0.85rem 1rem;
+    background: rgba(239, 231, 215, 0.65);
+    border-left: 2px solid var(--gold);
+    font-size: 0.9rem;
+  }
+
+  .visit-info li + li { margin-top: 0.25rem; }
+  .visit-info strong { color: var(--green); font-weight: 500; }
+  .visit-info a { color: var(--green); }
+
+  .photo-credits {
+    margin: 2rem 0 0;
+    border-top: 1px solid #ddd2bd;
+    padding-top: 1rem;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .photo-credits summary { cursor: pointer; color: var(--green); font-weight: 500; }
+  .photo-credits ol { padding: 0.7rem 0 0 1.5rem; columns: 2; column-gap: 2rem; }
+  .photo-credits li { break-inside: avoid; margin: 0 0 0.35rem; }
+  .photo-credits a { color: var(--green); }
+
+  @media (max-width: 600px) {
+    .quick-picks { grid-template-columns: 1fr; padding: 1.4rem; }
+    .quick-picks h2, .quick-picks .route-note { grid-column: auto; }
+    .photo-credits ol { columns: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition-duration: 0.01ms !important; }
   }
 
   /* ---------- Text ---------- */
@@ -273,10 +350,14 @@
   }
 
   footer a { color: var(--gold-light); }
+  footer .photo-credits { color: #e0d8c6; border-top-color: #6f674f; }
+  footer .photo-credits summary { color: var(--gold-light); }
+  footer .photo-credits a { color: var(--gold-light); }
 
   /* ---------- Responsive ---------- */
 
   @media (max-width: 860px) {
+    html { scroll-padding-top: 1rem; }
     section.spot { grid-template-columns: 1fr; gap: 1.8rem; padding: 3rem 0; }
     section.spot:nth-child(even) .gallery { order: 0; }
     nav.index { position: static; }
@@ -288,211 +369,363 @@
 <header class="hero">
   <p class="kicker">A Personal City Guide</p>
   <h1>Wien<span class="amp">.</span></h1>
-  <p class="subtitle">Eight places worth your time</p>
+  <p class="subtitle">Nine places worth your time</p>
   <p class="lede">Vienna blends imperial grandeur, quirky modern architecture, and tranquil natural spaces. Here is what each spot offers to help you decide.</p>
 </header>
 
-<nav class="index">
+<aside class="quick-picks" aria-labelledby="quick-picks-title">
+  <h2 id="quick-picks-title">Find your kind of Vienna</h2>
+  <p><strong>Art &amp; architecture</strong><br>Belvedere, Palace of Justice, Hundertwasserhaus and Votivkirche.</p>
+  <p><strong>Green &amp; unhurried</strong><br>Botanical Garden and Setagayapark.</p>
+  <p><strong>Indoor discoveries</strong><br>Butterfly House, Haus des Meeres and Haus der Musik.</p>
+  <p><strong>Easy pairing</strong><br>Belvedere and the adjoining Botanical Garden make a convenient half-day.</p>
+  <p class="route-note">The numbered list is for browsing, not a ranking or suggested route. Visit lengths below are planning estimates; check linked sites for current hours and admission.</p>
+</aside>
+
+<nav class="index" aria-label="Places in this guide">
   <a href="#belvedere"><span class="num">01</span>Belvedere</a>
   <a href="#botanical"><span class="num">02</span>Botanical Garden</a>
   <a href="#butterfly"><span class="num">03</span>Butterfly House</a>
   <a href="#justice"><span class="num">04</span>Palace of Justice</a>
   <a href="#setagaya"><span class="num">05</span>Setagayapark</a>
-  <a href="#kunsthaus"><span class="num">06</span>Kunst Haus Wien</a>
+  <a href="#hundertwasserhaus"><span class="num">06</span>Hundertwasserhaus</a>
   <a href="#meeres"><span class="num">07</span>Haus des Meeres</a>
   <a href="#musik"><span class="num">08</span>Haus der Musik</a>
+  <a href="#votivkirche"><span class="num">09</span>Votivkirche</a>
 </nav>
 
 <main>
 
   <!-- 01 Belvedere -->
   <section class="spot" id="belvedere">
-    <div class="gallery">
-      <div class="frame"><img class="main-img" src="images/belvedere-1.jpg" alt="Upper Belvedere palace and reflecting pool"></div>
-      <div class="thumbs">
-        <button class="active"><img src="images/belvedere-1.jpg" alt=""></button>
-        <button><img src="images/belvedere-2.jpg" alt=""></button>
-        <button><img src="images/belvedere-3.jpg" alt=""></button>
-      </div>
-    </div>
-    <div class="text">
+    <div class="spot-heading">
       <div class="number">01</div>
       <h2>Belvedere Palace</h2>
       <p class="aka">Schloss Belvedere</p>
-      <p class="vibe">Imperial Baroque grandeur &amp; iconic Austrian art</p>
-      <p>A UNESCO World Heritage complex comprising the Upper and Lower Belvedere set within stepped French formal gardens. The Upper Belvedere holds Austria's premier art collection, headlined by Gustav Klimt's <em>The Kiss</em> and major works by Egon Schiele.</p>
-      <p class="best"><strong>Best for</strong> — anyone wanting classic Viennese palatial history and world-famous fine art.</p>
+    </div>
+    <div class="gallery">
+      <figure class="frame">
+        <img class="main-img" src="images/belvedere-1.jpg" alt="Upper Belvedere's south façade in daylight">
+        <figcaption class="photo-caption">
+          <span class="caption-title">Upper Belvedere's south façade in daylight</span>
+          <small class="photo-credit">Photo by <a class="credit-author" href="https://commons.wikimedia.org/wiki/File:Wien_-_Schloss_Belvedere,_oberes_(1).JPG" target="_blank" rel="noopener">C.Stadler/Bwag</a> · <a class="credit-license" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a></small>
+        </figcaption>
+      </figure>
+      <div class="thumbs">
+        <button type="button" class="active" aria-label="Show image: Upper Belvedere's south façade in daylight" aria-pressed="true" data-alt="Upper Belvedere's south façade in daylight" data-caption="Upper Belvedere's south façade in daylight" data-author="C.Stadler/Bwag" data-source="https://commons.wikimedia.org/wiki/File:Wien_-_Schloss_Belvedere,_oberes_(1).JPG" data-license="CC BY-SA 4.0" data-license-url="https://creativecommons.org/licenses/by-sa/4.0/"><img src="images/belvedere-1.jpg" alt=""></button>
+        <button type="button" aria-label="Show image: Upper Belvedere at blue hour" aria-pressed="false" data-alt="Upper Belvedere Palace at blue hour" data-caption="Upper Belvedere at blue hour" data-author="Diego Delso" data-source="https://commons.wikimedia.org/wiki/File:Palacio_Belvedere,_Viena,_Austria,_2020-02-01,_DD_93-95_HDR.jpg" data-license="CC BY-SA 4.0" data-license-url="https://creativecommons.org/licenses/by-sa/4.0/"><img src="images/belvedere-2.jpg" alt=""></button>
+        <button type="button" aria-label="Show image: Sphinx sculptures in Belvedere Gardens" aria-pressed="false" data-alt="Sphinx sculptures in the gardens of Belvedere Palace" data-caption="Sphinx sculptures in Belvedere Gardens" data-author="Sb2s3" data-source="https://commons.wikimedia.org/wiki/File:Sphinx_sculptures,_Belvedere_Gardens,_Vienna.JPG" data-license="CC BY-SA 4.0" data-license-url="https://creativecommons.org/licenses/by-sa/4.0/"><img src="images/belvedere-3.jpg" alt=""></button>
+      </div>
+    </div>
+    <div class="text">
+      <p class="vibe">Baroque architecture, formal gardens and Austrian art</p>
+      <p>The Upper and Lower Belvedere and their French-style gardens are part of Vienna’s UNESCO-listed Historic Centre. The Upper Belvedere displays a major collection of Austrian art, including Gustav Klimt’s <em>The Kiss</em> and works by Egon Schiele.</p>
+      <p class="best"><strong>Best for</strong> — art, Baroque architecture and a garden walk.</p>
+      <ul class="visit-info">
+        <li><strong>Admission</strong> — The main gardens are free; museum entry is paid. Upper and Lower Belvedere tickets have timed entry; booking online is recommended.</li>
+        <li><strong>Suggested time</strong> — 2–3 hours for the Upper Belvedere and a stroll through the main gardens (estimate).</li>
+        <li><strong>Address</strong> — Prinz-Eugen-Straße 27, 1030 Vienna. <a href="https://www.belvedere.at/en/visit/upper-belvedere" target="_blank" rel="noopener">Current tickets, opening hours and access</a>.</li>
+      </ul>
       <div class="links">
-        <a class="btn" href="https://www.belvedere.at/en" target="_blank" rel="noopener">Official site</a>
-        <a class="btn gold" href="https://www.google.com/maps/search/?api=1&amp;query=Belvedere+Palace+Vienna" target="_blank" rel="noopener">Google Maps &nearr;</a>
+        <a class="btn" href="https://www.belvedere.at/en/visit/upper-belvedere" target="_blank" rel="noopener">Upper Belvedere</a>
+        <a class="btn gold" href="https://www.google.com/maps/search/?api=1&amp;query=Upper+Belvedere%2C+Prinz-Eugen-Stra%C3%9Fe+27%2C+1030+Vienna" target="_blank" rel="noopener">Google Maps &nearr;</a>
       </div>
     </div>
   </section>
 
   <!-- 02 Botanical Garden -->
   <section class="spot" id="botanical">
-    <div class="gallery">
-      <div class="frame"><img class="main-img" src="images/botanical-1.jpg" alt="Grounds of the University of Vienna Botanical Garden"></div>
-      <div class="thumbs">
-        <button class="active"><img src="images/botanical-1.jpg" alt=""></button>
-        <button><img src="images/botanical-2.jpg" alt=""></button>
-        <button><img src="images/botanical-3.jpg" alt=""></button>
-      </div>
-    </div>
-    <div class="text">
+    <div class="spot-heading">
       <div class="number">02</div>
       <h2>Botanical Garden</h2>
       <p class="aka">Botanischer Garten der Universität Wien</p>
-      <p class="vibe">An unhurried, leafy scientific oasis right in the city</p>
-      <p>Founded in 1754 by Empress Maria Theresa, this 8-hectare living laboratory borders the Belvedere gardens and cultivates over 12,000 plant species from across the globe. It is quiet, educational, and free to enter.</p>
-      <p class="best"><strong>Best for</strong> — nature lovers and travelers seeking a quiet stroll away from tourist crowds.</p>
+    </div>
+    <div class="gallery">
+      <figure class="frame">
+        <img class="main-img" src="images/botanical-1.jpg" alt="Botanical Garden of the University of Vienna">
+        <figcaption class="photo-caption">
+          <span class="caption-title">Botanical Garden of the University of Vienna</span>
+          <small class="photo-credit">Photo by <a class="credit-author" href="https://commons.wikimedia.org/wiki/File:University_of_Vienna_-_Botanical_Garden.jpg" target="_blank" rel="noopener">Daderot</a> · <a class="credit-license" href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a></small>
+        </figcaption>
+      </figure>
+      <div class="thumbs">
+        <button type="button" class="active" aria-label="Show image: Botanical Garden of the University of Vienna" aria-pressed="true" data-alt="Botanical Garden of the University of Vienna" data-caption="Botanical Garden of the University of Vienna" data-author="Daderot" data-source="https://commons.wikimedia.org/wiki/File:University_of_Vienna_-_Botanical_Garden.jpg" data-license="CC BY-SA 3.0" data-license-url="https://creativecommons.org/licenses/by-sa/3.0/"><img src="images/botanical-1.jpg" alt=""></button>
+        <button type="button" aria-label="Show image: Lotus basin in the university garden" aria-pressed="false" data-alt="Lotus basin in the Botanical Garden of the University of Vienna" data-caption="Lotus basin in the university garden" data-author="Geolina163" data-source="https://commons.wikimedia.org/wiki/File:Botanischer_Garten_der_Universit%C3%A4t_Wien_Lotusbecken.jpg" data-license="CC BY-SA 4.0" data-license-url="https://creativecommons.org/licenses/by-sa/4.0/"><img src="images/botanical-2.jpg" alt=""></button>
+        <button type="button" aria-label="Show image: Botanical Garden of the University of Vienna" aria-pressed="false" data-alt="Botanical Garden of the University of Vienna" data-caption="Botanical Garden paths and plantings" data-author="Feldkurat Katz" data-source="https://commons.wikimedia.org/wiki/File:Botanischer_Garten_Wien_I.jpg" data-license="Public domain" data-license-url="https://commons.wikimedia.org/wiki/File:Botanischer_Garten_Wien_I.jpg"><img src="images/botanical-3.jpg" alt=""></button>
+      </div>
+    </div>
+    <div class="text">
+      <p class="vibe">A free, leafy retreat adjoining the Belvedere gardens</p>
+      <p>Established in 1754 under Empress Maria Theresa, the University of Vienna’s garden holds more than 12,000 plant species from six continents. Its paths, meadows, specialist plant collections and greenhouses offer a quiet change of pace close to the city centre.</p>
+      <p class="best"><strong>Best for</strong> — a relaxed garden walk, plant collections and a quiet break.</p>
+      <ul class="visit-info">
+        <li><strong>Admission</strong> — Free. Seasonal opening hours; the garden may close in severe weather.</li>
+        <li><strong>Suggested time</strong> — 1–2 hours (estimate).</li>
+        <li><strong>Entrance</strong> — Main visitor entrance at Mechelgasse 2, 1030 Vienna. Closed December 24–January 6. <a href="https://botanischergarten.univie.ac.at/en/your-visit/entrancesopening-hours/" target="_blank" rel="noopener">Check current opening hours and access</a>.</li>
+      </ul>
       <div class="links">
-        <a class="btn" href="https://botanischergarten.univie.ac.at/en/" target="_blank" rel="noopener">Official site</a>
-        <a class="btn gold" href="https://www.google.com/maps/search/?api=1&amp;query=Botanical+Garden+of+the+University+of+Vienna" target="_blank" rel="noopener">Google Maps &nearr;</a>
+        <a class="btn" href="https://botanischergarten.univie.ac.at/en/your-visit/entrancesopening-hours/" target="_blank" rel="noopener">Hours &amp; visitor info</a>
+        <a class="btn gold" href="https://www.google.com/maps/search/?api=1&amp;query=Botanical+Garden+of+the+University+of+Vienna%2C+Mechelgasse+2%2C+1030+Vienna" target="_blank" rel="noopener">Google Maps &nearr;</a>
       </div>
     </div>
   </section>
 
   <!-- 03 Butterfly House -->
   <section class="spot" id="butterfly">
-    <div class="gallery">
-      <div class="frame"><img class="main-img" src="images/butterfly-1.jpg" alt="Art Nouveau glasshouse of the Imperial Butterfly House"></div>
-      <div class="thumbs">
-        <button class="active"><img src="images/butterfly-1.jpg" alt=""></button>
-        <button><img src="images/butterfly-2.jpg" alt=""></button>
-        <button><img src="images/butterfly-3.jpg" alt=""></button>
-      </div>
-    </div>
-    <div class="text">
+    <div class="spot-heading">
       <div class="number">03</div>
       <h2>Imperial Butterfly House</h2>
       <p class="aka">Schmetterlinghaus</p>
-      <p class="vibe">A humid, tropical slice of rainforest inside a historic palace park</p>
-      <p>Located in a grand Art Nouveau glasshouse within the Hofburg's Burggarten, the sanctuary keeps a year-round temperature of 26&nbsp;°C with 80% humidity. Around 400 colorful, free-flying tropical butterflies flutter among indoor waterfalls and exotic blossoms.</p>
-      <p class="best"><strong>Best for</strong> — a quick, sensory visit, especially rewarding on cold or rainy days.</p>
+    </div>
+    <div class="gallery">
+      <figure class="frame">
+        <img class="main-img" src="images/butterfly-1.jpg" alt="Art Nouveau palm-house façade of the Imperial Butterfly House">
+        <figcaption class="photo-caption">
+          <span class="caption-title">Art Nouveau palm-house façade in Burggarten</span>
+          <small class="photo-credit">Photo by <a class="credit-author" href="https://commons.wikimedia.org/wiki/File:Exterior_Schmetterlinghaus_Hofburg.jpg" target="_blank" rel="noopener">FRIEDom</a> · <a class="credit-license" href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a></small>
+        </figcaption>
+      </figure>
+      <div class="thumbs">
+        <button type="button" class="active" aria-label="Show image: Butterfly House exterior in Burggarten" aria-pressed="true" data-alt="Art Nouveau palm-house façade of the Imperial Butterfly House" data-caption="Art Nouveau palm-house façade in Burggarten" data-author="FRIEDom" data-source="https://commons.wikimedia.org/wiki/File:Exterior_Schmetterlinghaus_Hofburg.jpg" data-license="CC BY 4.0" data-license-url="https://creativecommons.org/licenses/by/4.0/"><img src="images/butterfly-1.jpg" alt=""></button>
+        <button type="button" aria-label="Show image: Butterflies inside the Schmetterlinghaus" aria-pressed="false" data-alt="Butterflies among tropical foliage inside the Schmetterlinghaus" data-caption="Inside the Schmetterlinghaus" data-author="Jorge Saturno" data-credit-line="Jorge Saturno / Wikimedia Commons / “Interior of the Schmetterlinghaus” / CC BY-SA 4.0" data-source="https://commons.wikimedia.org/wiki/File:Interior_of_the_Schmetterlinghaus.jpg" data-license="CC BY-SA 4.0" data-license-url="https://creativecommons.org/licenses/by-sa/4.0/"><img src="images/butterfly-2.jpg" alt=""></button>
+        <button type="button" aria-label="Show image: Palm house and Butterfly House in Burggarten" aria-pressed="false" data-alt="Historic palm house housing the Butterfly House in Burggarten" data-caption="Palm house and Butterfly House in Burggarten" data-author="Manfred Werner / Tsui" data-source="https://commons.wikimedia.org/wiki/File:Burggarten_Palmenhaus-Schmetterlinghaus_2009_a.jpg" data-license="CC BY-SA 3.0" data-license-url="https://creativecommons.org/licenses/by-sa/3.0/"><img src="images/butterfly-3.jpg" alt=""></button>
+      </div>
+    </div>
+    <div class="text">
+      <p class="vibe">A tropical glasshouse in the Hofburg’s Burggarten</p>
+      <p>Inside an Art Nouveau palm house at the edge of Burggarten, around 400 live tropical butterflies fly among exotic plants and waterfalls. Expect warm, very humid conditions year-round—a short, sensory visit that can be especially welcome on a cold or rainy day.</p>
+      <p class="best"><strong>Best for</strong> — butterflies, tropical plants and a compact indoor stop.</p>
+      <ul class="visit-info">
+        <li><strong>Admission</strong> — Paid entry; see the official site for current ticket prices and hours.</li>
+        <li><strong>Suggested time</strong> — 30–60 minutes (estimate).</li>
+        <li><strong>Location</strong> — Burggarten, near the Hofburg and Vienna State Opera. <a href="https://www.schmetterlinghaus.at/en-gb/hours" target="_blank" rel="noopener">Check visitor information before going</a>.</li>
+      </ul>
       <div class="links">
-        <a class="btn" href="https://www.schmetterlinghaus.at/en-gb" target="_blank" rel="noopener">Official site</a>
-        <a class="btn gold" href="https://www.google.com/maps/search/?api=1&amp;query=Schmetterlinghaus+Vienna" target="_blank" rel="noopener">Google Maps &nearr;</a>
+        <a class="btn" href="https://www.schmetterlinghaus.at/en-gb" target="_blank" rel="noopener">Tickets &amp; visitor info</a>
+        <a class="btn gold" href="https://www.google.com/maps?cid=6927762595993608111" target="_blank" rel="noopener">Google Maps &nearr;</a>
       </div>
     </div>
   </section>
 
   <!-- 04 Palace of Justice -->
   <section class="spot" id="justice">
-    <div class="gallery">
-      <div class="frame"><img class="main-img" src="images/justice-1.jpg" alt="Monumental central atrium, grand staircase, and statue of Justitia"></div>
-      <div class="thumbs">
-        <button class="active"><img src="images/justice-1.jpg" alt="Central atrium and staircase"></button>
-        <button><img src="images/justice-2.jpg" alt="Rooftop terrace view over the Austrian Parliament"></button>
-        <button><img src="images/justice-3.jpg" alt="Three-story arcaded atrium hall"></button>
-      </div>
-    </div>
-    <div class="text">
+    <div class="spot-heading">
       <div class="number">04</div>
       <h2>Palace of Justice</h2>
       <p class="aka">Justizpalast</p>
-      <p class="vibe">Imposing Neo-Renaissance civic architecture &amp; a local skyline secret</p>
-      <p>The working seat of Austria's Supreme Court. Visitors pass through security to enter the cavernous central atrium, which features a monumental marble staircase and three-story arcades. The 5th floor houses the rooftop Justiz-Café, which serves weekday meals and drinks alongside open terrace views across Vienna's roofs.</p>
-      <p class="best"><strong>Best for</strong> — architecture fans and budget-friendly rooftop viewpoints.</p>
+    </div>
+    <div class="gallery">
+      <figure class="frame">
+        <img class="main-img" src="images/justice-1.jpg" alt="Sculpture of Justitia in the Palace of Justice's main hall">
+        <figcaption class="photo-caption">
+          <span class="caption-title">Justitia in the main hall</span>
+          <small class="photo-credit">Photo by <a class="credit-author" href="https://commons.wikimedia.org/wiki/File:Vienna_Austria_Justizpalast-01.jpg" target="_blank" rel="noopener">CEphoto, Uwe Aranas</a> · <a class="credit-license" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a></small>
+        </figcaption>
+      </figure>
+      <div class="thumbs">
+        <button type="button" class="active" aria-label="Show image: Statue of Justitia in the main hall" aria-pressed="true" data-alt="Sculpture of Justitia in the Palace of Justice's main hall" data-caption="Justitia in the main hall" data-author="CEphoto, Uwe Aranas" data-source="https://commons.wikimedia.org/wiki/File:Vienna_Austria_Justizpalast-01.jpg" data-license="CC BY-SA 4.0" data-license-url="https://creativecommons.org/licenses/by-sa/4.0/"><img src="images/justice-1.jpg" alt=""></button>
+        <button type="button" aria-label="Show image: Parliament seen from the Justiz-Café terrace" aria-pressed="false" data-alt="Austrian Parliament building viewed from the Palace of Justice rooftop terrace" data-caption="Parliament from the Justiz-Café terrace" data-author="Herzi Pinki" data-source="https://commons.wikimedia.org/wiki/File:Austrian_Parliament_Building_from_Palace_of_Justice,_Vienna.jpg" data-license="CC BY-SA 4.0" data-license-url="https://creativecommons.org/licenses/by-sa/4.0/"><img src="images/justice-2.jpg" alt=""></button>
+        <button type="button" aria-label="Show image: Arcaded central hall of the Palace of Justice" aria-pressed="false" data-alt="Three-story arcaded hall of the Palace of Justice" data-caption="Arcaded hall at the Justizpalast" data-author="C.Stadler/Bwag" data-source="https://commons.wikimedia.org/wiki/File:Wien_-_Justizpalast,_Aula.JPG" data-license="CC BY-SA 4.0" data-license-url="https://creativecommons.org/licenses/by-sa/4.0/"><img src="images/justice-3.jpg" alt=""></button>
+      </div>
+    </div>
+    <div class="text">
+      <p class="vibe">Neo-Renaissance architecture and a working courthouse</p>
+      <p>Austria’s Supreme Court is housed in this richly decorated courthouse. Visitors can see the central hall, grand staircase and second-floor gallery; the public areas are limited, so this is a brief architectural visit rather than a museum tour. The Justiz-Café occupies the fifth floor.</p>
+      <p class="best"><strong>Best for</strong> — architecture enthusiasts and a weekday café stop with a view.</p>
+      <ul class="visit-info">
+        <li><strong>Admission</strong> — The designated public areas and café are accessible after a security check; other areas are not open to sightseeing visitors.</li>
+        <li><strong>Suggested time</strong> — 30–60 minutes (estimate); café time is extra.</li>
+        <li><strong>Access</strong> — Public areas are open Monday–Friday, 07:00–16:00; the café is open 08:00–16:00 and closed on weekends and public holidays. Security checks apply; leave knives, scissors and similar restricted items behind. <a href="https://www.justiz.gv.at/olg-wien/oberlandesgericht-wien/besichtigung-information-for-visitors.dcd.de.html" target="_blank" rel="noopener">Official visitor rules and public areas</a>.</li>
+      </ul>
       <div class="links">
-        <a class="btn" href="https://justizcafe.at/" target="_blank" rel="noopener">Justiz-Café</a>
-        <a class="btn gold" href="https://www.google.com/maps/search/?api=1&amp;query=Justizpalast+Vienna" target="_blank" rel="noopener">Google Maps &nearr;</a>
+        <a class="btn" href="https://justizcafe.at/" target="_blank" rel="noopener">Justiz-Café hours</a>
+        <a class="btn gold" href="https://www.google.com/maps/search/?api=1&amp;query=Palace+of+Justice%2C+Schmerlingplatz+11%2C+1011+Vienna" target="_blank" rel="noopener">Google Maps &nearr;</a>
       </div>
     </div>
   </section>
 
   <!-- 05 Setagayapark -->
   <section class="spot" id="setagaya">
-    <div class="gallery">
-      <div class="frame"><img class="main-img" src="images/setagaya-1.jpg" alt="Japanese garden and pond in Setagayapark"></div>
-      <div class="thumbs">
-        <button class="active"><img src="images/setagaya-1.jpg" alt=""></button>
-        <button><img src="images/setagaya-2.jpg" alt=""></button>
-        <button><img src="images/setagaya-3.jpg" alt=""></button>
-      </div>
-    </div>
-    <div class="text">
+    <div class="spot-heading">
       <div class="number">05</div>
       <h2>Setagayapark</h2>
       <p class="aka">Japanese Garden in Döbling</p>
-      <p class="vibe">Serene, meditative Japanese garden design in Vienna's 19th district</p>
-      <p>Built in 1992 by Japanese landscape architect Ken Nakajima to honor a twinning partnership with Setagaya, Tokyo. Packed into roughly 4,700&nbsp;m² are stone pagodas, arched wooden bridges, cascading waterfalls, a tea house, and a pond with koi fish. <em>Note: closed during winter, November through February.</em></p>
-      <p class="best"><strong>Best for</strong> — quiet contemplation, Japanese aesthetics, and photo walks (especially during cherry blossom season or autumn foliage).</p>
+    </div>
+    <div class="gallery">
+      <figure class="frame">
+        <img class="main-img" src="images/setagaya-1.jpg" alt="Japanese garden at Setagayapark">
+        <figcaption class="photo-caption">
+          <span class="caption-title">Japanese garden at Setagayapark</span>
+          <small class="photo-credit">Photo by <a class="credit-author" href="https://commons.wikimedia.org/wiki/File:Setagayapark,_Wien_-_September_2017_-_02.jpg" target="_blank" rel="noopener">Jean-Frédéric</a> · <a class="credit-license" href="https://creativecommons.org/publicdomain/zero/1.0/deed.en" target="_blank" rel="noopener">CC0</a></small>
+        </figcaption>
+      </figure>
+      <div class="thumbs">
+        <button type="button" class="active" aria-label="Show image: Japanese garden at Setagayapark" aria-pressed="true" data-alt="Japanese garden at Setagayapark" data-caption="Japanese garden at Setagayapark" data-author="Jean-Frédéric" data-source="https://commons.wikimedia.org/wiki/File:Setagayapark,_Wien_-_September_2017_-_02.jpg" data-license="CC0" data-license-url="https://creativecommons.org/publicdomain/zero/1.0/deed.en"><img src="images/setagaya-1.jpg" alt=""></button>
+        <button type="button" aria-label="Show image: Setagayapark in Döbling" aria-pressed="false" data-alt="Setagayapark, a Japanese garden in Vienna's Döbling district" data-caption="Setagayapark in Döbling" data-author="Gryffindor" data-source="https://commons.wikimedia.org/wiki/File:Setagaya_Park_Vienna_12.JPG" data-license="Public domain" data-license-url="https://commons.wikimedia.org/wiki/File:Setagaya_Park_Vienna_12.JPG"><img src="images/setagaya-2.jpg" alt=""></button>
+        <button type="button" aria-label="Show image: Bridge at Setagayapark" aria-pressed="false" data-alt="Bridge in the Japanese-style Setagayapark garden" data-caption="Bridge at Setagayapark" data-author="Marina Ivkic" data-source="https://commons.wikimedia.org/wiki/File:Setagaya_Br%C3%BCcke_im_Tokyo_Park_in_Wien_D%C3%B6bling.jpg" data-license="CC BY-SA 4.0" data-license-url="https://creativecommons.org/licenses/by-sa/4.0/"><img src="images/setagaya-3.jpg" alt=""></button>
+      </div>
+    </div>
+    <div class="text">
+      <p class="vibe">A small Japanese-style garden in Vienna’s 19th district</p>
+      <p>Planned in 1992 by Japanese garden designer Ken Nakajima, the park reflects the friendship between Döbling and Tokyo’s Setagaya district. Its roughly 4,700&nbsp;m² include a tea house, a stone lantern, a watercourse, ponds and seasonal plantings.</p>
+      <p class="best"><strong>Best for</strong> — a peaceful garden walk, especially during cherry blossom or autumn colour.</p>
+      <ul class="visit-info">
+        <li><strong>Admission</strong> — Free; opening and closing times change with the season.</li>
+        <li><strong>Suggested time</strong> — 30–60 minutes (estimate).</li>
+        <li><strong>Seasonal access</strong> — The City of Vienna’s English and German pages disagree about November and winter closure dates. Check the current hours before a late-autumn or winter visit: <a href="https://www.wien.gv.at/en/leisure/setagaya-park" target="_blank" rel="noopener">English</a> · <a href="https://www.wien.gv.at/freizeit/setagayapark" target="_blank" rel="noopener">Deutsch</a>.</li>
+      </ul>
       <div class="links">
         <a class="btn" href="https://www.wien.gv.at/en/leisure/setagaya-park" target="_blank" rel="noopener">City of Vienna</a>
-        <a class="btn gold" href="https://www.google.com/maps/search/?api=1&amp;query=Setagayapark+Vienna" target="_blank" rel="noopener">Google Maps &nearr;</a>
+        <a class="btn gold" href="https://www.google.com/maps/search/?api=1&amp;query=Setagayapark%2C+1190+Vienna" target="_blank" rel="noopener">Google Maps &nearr;</a>
       </div>
     </div>
   </section>
 
   <!-- 06 Kunst Haus Wien -->
-  <section class="spot" id="kunsthaus">
+  <section class="spot" id="hundertwasserhaus">
+    <div class="spot-heading">
+      <div class="number">06</div>
+      <h2>Hundertwasserhaus</h2>
+      <p class="aka">Hundertwasser House</p>
+    </div>
     <div class="gallery">
-      <div class="frame"><img class="main-img" src="images/kunsthaus-1.jpg" alt="Patchwork facade of Kunst Haus Wien"></div>
+      <figure class="frame">
+        <img class="main-img" src="images/hundertwasser-loewengasse.jpg" alt="Löwengasse façade and glazed stair tower at the Hundertwasserhaus">
+        <figcaption class="photo-caption">
+          <span class="caption-title">Löwengasse façade and glazed stair tower</span>
+          <small class="photo-credit">Photo by <a class="credit-author" href="https://commons.wikimedia.org/wiki/File:Wien_-_Hundertwasserhaus_(04).JPG" target="_blank" rel="noopener">C.Stadler/Bwag</a> · <a class="credit-license" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a></small>
+        </figcaption>
+      </figure>
       <div class="thumbs">
-        <button class="active"><img src="images/kunsthaus-1.jpg" alt=""></button>
-        <button><img src="images/kunsthaus-2.jpg" alt=""></button>
-        <button><img src="images/kunsthaus-3.jpg" alt=""></button>
+        <button type="button" class="active" aria-label="Show image: Löwengasse façade and glazed stair tower" aria-pressed="true" data-alt="Löwengasse façade and glazed stair tower at the Hundertwasserhaus" data-caption="Löwengasse façade and glazed stair tower" data-author="C.Stadler/Bwag" data-source="https://commons.wikimedia.org/wiki/File:Wien_-_Hundertwasserhaus_(04).JPG" data-license="CC BY-SA 4.0" data-license-url="https://creativecommons.org/licenses/by-sa/4.0/"><img src="images/hundertwasser-loewengasse.jpg" alt=""></button>
+        <button type="button" aria-label="Show image: Fountain at the Hundertwasserhaus" aria-pressed="false" data-alt="Decorative fountain in front of the Hundertwasserhaus" data-caption="Fountain at the Hundertwasserhaus" data-author="Dietmar Rabich" data-source="https://commons.wikimedia.org/wiki/File:Wien,_Hundertwasserhaus_--_2018_--_3175.jpg" data-license="CC BY-SA 4.0" data-license-url="https://creativecommons.org/licenses/by-sa/4.0/"><img src="images/hundertwasser-fountain.jpg" alt=""></button>
+        <button type="button" aria-label="Show image: Ornate streetlamp and façade details at the Hundertwasserhaus" aria-pressed="false" data-alt="Ornate streetlamp beside the Hundertwasserhaus's colourful façade" data-caption="Streetlamp and façade detail at the Hundertwasserhaus" data-author="Dietmar Rabich" data-source="https://commons.wikimedia.org/wiki/File:Wien,_Hundertwasserhaus_--_2018_--_3178.jpg" data-license="CC BY-SA 4.0" data-license-url="https://creativecommons.org/licenses/by-sa/4.0/"><img src="images/hundertwasser-streetlamp.jpg" alt=""></button>
       </div>
     </div>
     <div class="text">
-      <div class="number">06</div>
-      <h2>Kunst Haus Wien</h2>
-      <p class="aka">Museum Hundertwasser</p>
-      <p class="vibe">Whimsical, anti-conformist, and deeply ecological</p>
-      <p>Designed by Austrian eco-artist Friedensreich Hundertwasser, this building refuses straight lines and level floors. Expect uneven tiled corridors, patchwork ceramic facades, and live "tree tenants" growing straight out of windows. It houses Hundertwasser's paintings and architectural philosophy alongside rotating contemporary photography exhibits.</p>
-      <p class="best"><strong>Best for</strong> — creatives, fans of unique architecture, and sustainable art enthusiasts.</p>
+      <p class="vibe">Colourful, tree-filled residential architecture</p>
+      <p>Designed by artist Friedensreich Hundertwasser in collaboration with architects Josef Krawina and Peter Pelikan, this lively apartment building is known for its irregular lines, vivid façades and greenery woven into balconies and roof terraces. It is an inhabited residential house, so visitors admire it from the street only—please respect residents’ privacy. The Hundertwasser Village, a separate visitor attraction, is opposite; this is not the nearby Kunst Haus Wien museum.</p>
+      <p class="best"><strong>Best for</strong> — a quick architectural stop, colourful street photography and fans of Hundertwasser’s work.</p>
+      <ul class="visit-info">
+        <li><strong>Admission</strong> — Free to view from the street; the residence is not open to visitors.</li>
+        <li><strong>Suggested time</strong> — 20–30 minutes outside; allow longer if visiting the Village.</li>
+        <li><strong>Address</strong> — Kegelgasse 34–38, 1030 Vienna. <a href="https://www.wien.info/en/see-do/sights-from-a-to-z/hundertwasser-house-vienna-348464" target="_blank" rel="noopener">Vienna Tourist Board visitor information</a>.</li>
+      </ul>
       <div class="links">
-        <a class="btn" href="https://www.kunsthauswien.com/en/" target="_blank" rel="noopener">Official site</a>
-        <a class="btn gold" href="https://www.google.com/maps/search/?api=1&amp;query=Kunst+Haus+Wien+Vienna" target="_blank" rel="noopener">Google Maps &nearr;</a>
+        <a class="btn" href="https://www.wien.info/en/see-do/sights-from-a-to-z/hundertwasser-house-vienna-348464" target="_blank" rel="noopener">Visitor information</a>
+        <a class="btn gold" href="https://www.google.com/maps/search/?api=1&amp;query=Hundertwasserhaus%2C+Kegelgasse+34-38%2C+1030+Vienna" target="_blank" rel="noopener">Google Maps &nearr;</a>
       </div>
     </div>
   </section>
 
   <!-- 07 Haus des Meeres -->
   <section class="spot" id="meeres">
-    <div class="gallery">
-      <div class="frame"><img class="main-img" src="images/meeres-1.jpg" alt="Massive WWII concrete flak tower and climbing wall in Esterházypark"></div>
-      <div class="thumbs">
-        <button class="active"><img src="images/meeres-1.jpg" alt="Flak tower exterior and climbing wall"></button>
-        <button><img src="images/meeres-2.jpg" alt="Walk-through underwater Atlantic tunnel"></button>
-        <button><img src="images/meeres-3.jpg" alt="Panoramic rooftop observation deck view over Vienna"></button>
-      </div>
-    </div>
-    <div class="text">
+    <div class="spot-heading">
       <div class="number">07</div>
       <h2>Haus des Meeres</h2>
       <p class="aka">Aqua Terra Zoo</p>
-      <p class="vibe">Vibrant marine &amp; exotic wildlife inside massive WWII defense architecture</p>
-      <p>A public zoo installed inside a massive concrete flak tower in Esterházypark. Spanning 11 floors, it features a two-story shark tank, an aquarium walk-through tunnel, a multi-story tropical house with free-roaming monkeys and birds, and a 360° open-air rooftop observation deck.</p>
-      <p class="best"><strong>Best for</strong> — animal lovers, families, and anyone intrigued by adaptive reuse of wartime history.</p>
+    </div>
+    <div class="gallery">
+      <figure class="frame">
+        <img class="main-img" src="images/meeres-2026.jpg" alt="Haus des Meeres glass extension rises above the original flak tower">
+        <figcaption class="photo-caption">
+          <span class="caption-title">Glass extension above the historic flak tower, 2026</span>
+          <small class="photo-credit">Photo by <a class="credit-author" href="https://commons.wikimedia.org/wiki/File:Haus_des_Meeres_2026,_Wien_3.jpg" target="_blank" rel="noopener">Thomas Ledl</a> · <a class="credit-license" href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a></small>
+        </figcaption>
+      </figure>
+      <div class="thumbs">
+        <button type="button" class="active" aria-label="Show image: Glass extension above the historic flak tower, 2026" aria-pressed="true" data-alt="Haus des Meeres glass extension rises above the original flak tower" data-caption="Glass extension above the historic flak tower, 2026" data-author="Thomas Ledl" data-source="https://commons.wikimedia.org/wiki/File:Haus_des_Meeres_2026,_Wien_3.jpg" data-license="CC BY 4.0" data-license-url="https://creativecommons.org/licenses/by/4.0/"><img src="images/meeres-2026.jpg" alt=""></button>
+        <button type="button" aria-label="Show image: Walk-through Atlantic tunnel" aria-pressed="false" data-alt="Aquarium walk-through Atlantic tunnel at Haus des Meeres" data-caption="Walk-through Atlantic tunnel" data-author="Isiwal" data-source="https://commons.wikimedia.org/wiki/File:Wien_Haus_des_Meeres_Atlantiktunnel-0877.jpg" data-license="CC BY-SA 4.0" data-license-url="https://creativecommons.org/licenses/by-sa/4.0/"><img src="images/meeres-2.jpg" alt=""></button>
+        <button type="button" aria-label="Show image: Vienna viewed from the Haus des Meeres rooftop" aria-pressed="false" data-alt="Panoramic view over Vienna from Haus des Meeres" data-caption="View over Vienna from the rooftop" data-author="Kstipek" data-source="https://commons.wikimedia.org/wiki/File:Blick_auf_Wien_vom_Haus_des_Meeres_03.jpg" data-license="CC BY-SA 4.0" data-license-url="https://creativecommons.org/licenses/by-sa/4.0/"><img src="images/meeres-3.jpg" alt=""></button>
+      </div>
+    </div>
+    <div class="text">
+      <p class="vibe">A modern aquarium and zoo inside a former WWII flak tower</p>
+      <p>This zoo occupies a former anti-aircraft flak tower and spans 11 floors. Explore aquariums, the Atlantic tunnel, tropical habitats and more than 10,000 animals, then take in the city view from the rooftop. The recent glass addition is a striking counterpoint to the original concrete tower.</p>
+      <p class="best"><strong>Best for</strong> — marine life, families and seeing how a historic tower has been adapted for a new use.</p>
+      <ul class="visit-info">
+        <li><strong>Admission</strong> — Paid zoo entry; online tickets can help avoid queues.</li>
+        <li><strong>Suggested time</strong> — 2–3 hours (estimate).</li>
+        <li><strong>Hours &amp; access</strong> — Daily 09:00–20:00, including public holidays. Address: Fritz-Grünbaum-Platz 1, 1060 Vienna. <a href="https://www.haus-des-meeres.at/en/zoo/visitor-information" target="_blank" rel="noopener">Check tickets, visitor details and current hours</a>.</li>
+      </ul>
       <div class="links">
-        <a class="btn" href="https://www.haus-des-meeres.at/" target="_blank" rel="noopener">Official site</a>
-        <a class="btn gold" href="https://www.google.com/maps/search/?api=1&amp;query=Haus+des+Meeres+Vienna" target="_blank" rel="noopener">Google Maps &nearr;</a>
+        <a class="btn" href="https://www.haus-des-meeres.at/en/zoo/visitor-information" target="_blank" rel="noopener">Tickets &amp; visitor info</a>
+        <a class="btn gold" href="https://www.google.com/maps/search/?api=1&amp;query=Haus+des+Meeres%2C+Fritz-Gr%C3%BCnbaum-Platz+1%2C+1060+Vienna" target="_blank" rel="noopener">Google Maps &nearr;</a>
       </div>
     </div>
   </section>
 
   <!-- 08 Haus der Musik -->
   <section class="spot" id="musik">
-    <div class="gallery">
-      <div class="frame"><img class="main-img" src="images/musik-1.jpg" alt="Haus der Musik facade on Annagasse"></div>
-      <div class="thumbs">
-        <button class="active"><img src="images/musik-1.jpg" alt=""></button>
-        <button><img src="images/musik-2.jpg" alt=""></button>
-        <button><img src="images/musik-3.jpg" alt=""></button>
-      </div>
-    </div>
-    <div class="text">
+    <div class="spot-heading">
       <div class="number">08</div>
       <h2>House of Music</h2>
       <p class="aka">Haus der Musik</p>
-      <p class="vibe">Playful, high-tech auditory exploration in the historic capital of music</p>
-      <p>Housed in the palace where the Vienna Philharmonic was founded, this interactive museum turns sound physics and classical music into games. Highlights include the Virtual Conductor — where a projected Vienna Philharmonic plays to your baton tempo, or stops and heckles you if you lose time — and interactive sound installations.</p>
-      <p class="best"><strong>Best for</strong> — interactive learners, music enthusiasts, and fun rainy-afternoon visits.</p>
+    </div>
+    <div class="gallery">
+      <figure class="frame">
+        <img class="main-img" src="images/musik-1.jpg" alt="Historic Palais Erzherzog Carl, home of the Haus der Musik">
+        <figcaption class="photo-caption">
+          <span class="caption-title">Historic Palais Erzherzog Carl, now Haus der Musik</span>
+          <small class="photo-credit">Photo by <a class="credit-author" href="https://commons.wikimedia.org/wiki/File:Haus-Der-Musik-Wien.jpg" target="_blank" rel="noopener">Clemens PFEIFFER, A-1190 Wien</a> · <a class="credit-license" href="https://commons.wikimedia.org/wiki/File:Haus-Der-Musik-Wien.jpg" target="_blank" rel="noopener">Attribution only</a></small>
+        </figcaption>
+      </figure>
+      <div class="thumbs">
+        <button type="button" class="active" aria-label="Show image: Historic Palais Erzherzog Carl" aria-pressed="true" data-alt="Historic Palais Erzherzog Carl, home of the Haus der Musik" data-caption="Historic Palais Erzherzog Carl, now Haus der Musik" data-author="Clemens PFEIFFER, A-1190 Wien" data-source="https://commons.wikimedia.org/wiki/File:Haus-Der-Musik-Wien.jpg" data-license="Attribution only" data-license-url="https://commons.wikimedia.org/wiki/File:Haus-Der-Musik-Wien.jpg"><img src="images/musik-1.jpg" alt=""></button>
+        <button type="button" aria-label="Show image: Museum staircase with composers' names" aria-pressed="false" data-alt="Haus der Musik staircase with composers' names on the steps and copper organ pipes" data-caption="Staircase installation with composers' names" data-author="Joseolgon" data-source="https://commons.wikimedia.org/wiki/File:Haus_der_Musik_(5).jpg" data-license="CC BY-SA 4.0" data-license-url="https://creativecommons.org/licenses/by-sa/4.0/"><img src="images/musik-staircase.jpg" alt=""></button>
+        <button type="button" aria-label="Show image: Virtual Conductor exhibit" aria-pressed="false" data-alt="Visitor conducting the projected Vienna Philharmonic in the Virtual Conductor cinema" data-caption="The Virtual Conductor exhibit" data-author="Agathe Freischütz" data-source="https://commons.wikimedia.org/wiki/File:Haus_der_Musik_Wien_Kinosaal_Virtueller_Dirigent.jpg" data-license="CC BY-SA 4.0" data-license-url="https://creativecommons.org/licenses/by-sa/4.0/"><img src="images/musik-conductor.jpg" alt=""></button>
+      </div>
+    </div>
+    <div class="text">
+      <p class="vibe">Interactive music, sound and science in a historic palace</p>
+      <p>Set in Palais Erzherzog Carl, where composer Otto Nicolai lived while founding the Vienna Philharmonic, this four-floor museum explores sound and Viennese classical music. Try the interactive sound lab, discover the Philharmonic’s history and take the conductor’s baton: a projected orchestra responds to your movements.</p>
+      <p class="best"><strong>Best for</strong> — music fans, curious families and a lively indoor visit.</p>
+      <ul class="visit-info">
+        <li><strong>Admission</strong> — Paid museum entry; check the official site for current tickets.</li>
+        <li><strong>Suggested time</strong> — 1.5–2.5 hours (estimate).</li>
+        <li><strong>Hours</strong> — Daily 10:00–22:00; last admission 21:00. Check holiday hours before visiting.</li>
+      </ul>
       <div class="links">
-        <a class="btn" href="https://www.hdm.at/" target="_blank" rel="noopener">Official site</a>
-        <a class="btn gold" href="https://www.google.com/maps/search/?api=1&amp;query=Haus+der+Musik+Vienna" target="_blank" rel="noopener">Google Maps &nearr;</a>
+        <a class="btn" href="https://www.hdm.at/en/visit/" target="_blank" rel="noopener">Tickets &amp; visitor info</a>
+        <a class="btn gold" href="https://www.google.com/maps/search/?api=1&amp;query=Haus+der+Musik%2C+Seilerst%C3%A4tte+30%2C+1010+Vienna" target="_blank" rel="noopener">Google Maps &nearr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 Votivkirche -->
+  <section class="spot" id="votivkirche">
+    <div class="spot-heading">
+      <div class="number">09</div>
+      <h2>Votive Church</h2>
+      <p class="aka">Votivkirche</p>
+    </div>
+    <div class="gallery">
+      <figure class="frame">
+        <img class="main-img" src="images/votivkirche-park.jpg" alt="Votivkirche's twin spires seen across Sigmund-Freud-Park">
+        <figcaption class="photo-caption">
+          <span class="caption-title">Votivkirche from Sigmund-Freud-Park</span>
+          <small class="photo-credit">Photo by <a class="credit-author" href="https://commons.wikimedia.org/wiki/File:20250503_Votive_Church_Vienna_02.jpg" target="_blank" rel="noopener">Flocci Nivis</a> · <a class="credit-license" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a></small>
+        </figcaption>
+      </figure>
+      <div class="thumbs">
+        <button type="button" class="active" aria-label="Show image: Votivkirche from Sigmund-Freud-Park" aria-pressed="true" data-alt="Votivkirche's twin spires seen across Sigmund-Freud-Park" data-caption="Votivkirche from Sigmund-Freud-Park" data-author="Flocci Nivis" data-source="https://commons.wikimedia.org/wiki/File:20250503_Votive_Church_Vienna_02.jpg" data-license="CC BY-SA 4.0" data-license-url="https://creativecommons.org/licenses/by-sa/4.0/"><img src="images/votivkirche-park.jpg" alt=""></button>
+        <button type="button" aria-label="Show image: Stained-glass window inside the Votivkirche" aria-pressed="false" data-alt="Tall stained-glass window inside the Votivkirche" data-caption="Stained glass in the Votivkirche" data-author="Flocci Nivis" data-source="https://commons.wikimedia.org/wiki/File:20260415_Votive_Church_Vienna_02.jpg" data-license="CC BY-SA 4.0" data-license-url="https://creativecommons.org/licenses/by-sa/4.0/"><img src="images/votivkirche-window.jpg" alt=""></button>
+        <button type="button" aria-label="Show image: The Votivkirche's altar" aria-pressed="false" data-alt="Ornate altar inside the Votivkirche" data-caption="The Votivkirche's altar" data-author="Flocci Nivis" data-source="https://commons.wikimedia.org/wiki/File:20260415_Votive_Church_Vienna_03.jpg" data-license="CC BY-SA 4.0" data-license-url="https://creativecommons.org/licenses/by-sa/4.0/"><img src="images/votivkirche-altar.jpg" alt=""></button>
+      </div>
+    </div>
+    <div class="text">
+      <p class="vibe">Neo-Gothic spires, stained glass and a quiet landmark near the Ring</p>
+      <p>Heinrich von Ferstel’s twin-spired basilica was built as a votive offering after Emperor Franz Joseph survived an assassination attempt in 1853. At 99 metres, it is Vienna’s second-tallest church after St. Stephen’s Cathedral, and its nave is lit by 78 stained-glass windows. The small oratory museum holds the late-medieval Antwerp Passion Altar. The Votivkirche is an active parish church—please visit quietly and avoid service times.</p>
+      <p class="best"><strong>Best for</strong> — Gothic architecture, stained glass and a peaceful stop near the university quarter.</p>
+      <ul class="visit-info">
+        <li><strong>Admission</strong> — Church entry is free during visitor hours; the oratory museum costs €8 (€7 reduced; under 14 free).</li>
+        <li><strong>Suggested time</strong> — 30–60 minutes (estimate).</li>
+        <li><strong>Hours</strong> — Church: Tue–Fri 10:00–16:00, Sat 11:00–19:00, Sun and public holidays 09:00–13:00; closed Monday. Museum: Tue–Fri 13:00–15:00, Sat 14:00–17:00, or by appointment; reached by a spiral staircase, so not step-free. <a href="https://www.votivkirche.at/_service.htm" target="_blank" rel="noopener">Church hours</a> · <a href="https://www.votivkirche.at/_museum.htm" target="_blank" rel="noopener">Museum details</a>.</li>
+        <li><strong>Address</strong> — Straße des 8. Mai, 1090 Vienna. U2 Schottentor.</li>
+      </ul>
+      <div class="links">
+        <a class="btn" href="https://www.votivkirche.at/_service.htm" target="_blank" rel="noopener">Visitor information</a>
+        <a class="btn gold" href="https://www.google.com/maps/search/?api=1&amp;query=Votivkirche%2C+Stra%C3%9Fe+des+8.+Mai%2C+1090+Vienna" target="_blank" rel="noopener">Google Maps &nearr;</a>
       </div>
     </div>
   </section>
@@ -501,20 +734,58 @@
 
 <footer>
   <div class="mark">WIEN</div>
-  <p>Eight places worth your time · All photographs via <a href="https://commons.wikimedia.org" target="_blank" rel="noopener">Wikimedia Commons</a></p>
+  <p>Nine places worth your time · Visitor details can change; check linked official sites before you go.</p>
+  <details class="photo-credits">
+    <summary>Photo credits and licences</summary>
+    <p>Each photo’s creator, Commons source and licence are listed below. Images are resized for web display; gallery thumbnails are cropped by the layout. The site’s text and design are separate from the credited photographs.</p>
+    <ol class="photo-credit-list"></ol>
+  </details>
 </footer>
 
 <script>
+  function makeCreditLink(label, url) {
+    var link = document.createElement('a');
+    link.href = url;
+    link.textContent = label;
+    link.target = '_blank';
+    link.rel = 'noopener';
+    return link;
+  }
+
   document.querySelectorAll('.spot').forEach(function (spot) {
     var main = spot.querySelector('.main-img');
+    var title = spot.querySelector('.caption-title');
+    var credit = spot.querySelector('.photo-credit');
     spot.querySelectorAll('.thumbs button').forEach(function (btn) {
       btn.addEventListener('click', function () {
         var img = btn.querySelector('img');
+        var author = makeCreditLink(btn.dataset.author, btn.dataset.source);
+        var license = makeCreditLink(btn.dataset.license, btn.dataset.licenseUrl);
         main.src = img.src;
-        spot.querySelectorAll('.thumbs button').forEach(function (b) { b.classList.remove('active'); });
+        main.alt = btn.dataset.alt;
+        title.textContent = btn.dataset.caption;
+        if (btn.dataset.creditLine) {
+          credit.replaceChildren(makeCreditLink(btn.dataset.creditLine, btn.dataset.source));
+        } else {
+          credit.replaceChildren(document.createTextNode('Photo by '), author, document.createTextNode(' · '), license);
+        }
+        spot.querySelectorAll('.thumbs button').forEach(function (button) {
+          button.classList.remove('active');
+          button.setAttribute('aria-pressed', 'false');
+        });
         btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
       });
     });
+  });
+
+  var creditList = document.querySelector('.photo-credit-list');
+  document.querySelectorAll('.thumbs button').forEach(function (btn) {
+    var item = document.createElement('li');
+    var source = makeCreditLink(btn.dataset.caption, btn.dataset.source);
+    var license = makeCreditLink(btn.dataset.license, btn.dataset.licenseUrl);
+    item.append(source, document.createTextNode(' — ' + (btn.dataset.creditLine || 'Photo by ' + btn.dataset.author) + ' · '), license);
+    creditList.append(item);
   });
 </script>
 
